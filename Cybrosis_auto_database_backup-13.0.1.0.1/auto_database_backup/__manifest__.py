@@ -24,7 +24,7 @@
     'version': '13.0.1.0.1',
     'summary': """Generate automatic backup of databases and store to local,
      google drive or remote server""",
-    'description': """This module has been developed for creating database 
+    'description': """This module has been developed for creating database
     backups automatically and store it to the different locations.""",
     'author': "Cybrosys Techno Solutions",
     'website': "https://www.cybrosys.com",
@@ -43,6 +43,6 @@
     'license': 'LGPL-3',
     'images': ['static/description/banner.jpg'],
     'installable': True,
+    'application': True,
     'auto_install': False,
-    'application': False,
 }

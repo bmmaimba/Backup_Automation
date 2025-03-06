@@ -25,14 +25,14 @@
     'version': '15.0.5.1.0',
     'category': 'Discuss,Extra Tools',
     'summary': """Generate automatic backup of databases and store to local,
-     google drive, dropbox, nextcloud, amazon S3, onedrive or 
+     google drive, dropbox, nextcloud, amazon S3, onedrive or
      remote server""",
-    'description': """This module helps to generate backups of your databases 
-     automatically on regular interval of times. The generated backups can be 
-     stored into local storage, ftp server, sftp server, dropbox, Google Drive, 
-     Onedrive Nextcloud and Amazon S3. User can enable auto remove option to 
-     automatically delete old backups. User can enable email notification to 
-     be notified about the success and failure of the backup generation and 
+    'description': """This module helps to generate backups of your databases
+     automatically on regular interval of times. The generated backups can be
+     stored into local storage, ftp server, sftp server, dropbox, Google Drive,
+     Onedrive Nextcloud and Amazon S3. User can enable auto remove option to
+     automatically delete old backups. User can enable email notification to
+     be notified about the success and failure of the backup generation and
      storage.""",
     'author': "Cybrosys Techno Solutions",
     'company': 'Cybrosys Techno Solutions',
@@ -52,6 +52,6 @@
     'images': ['static/description/banner.gif'],
     'license': 'LGPL-3',
     'installable': True,
+    'application': True,
     'auto_install': False,
-    'application': False,
 }
