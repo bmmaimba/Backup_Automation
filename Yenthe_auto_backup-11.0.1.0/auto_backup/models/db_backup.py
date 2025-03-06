@@ -153,7 +153,8 @@ class db_backup(models.Model):
                 except:
                     raise
                 # Create name for dumpfile.
-                bkp_file = '%s_%s.%s' % (time.strftime('%Y_%m_%d_%H_%M_%S'), rec.name, rec.backup_type)
+                # bkp_file = '%s_%s.%s' % (time.strftime('%Y_%m_%d_%H_%M_%S'), rec.name, rec.backup_type)
+                bkp_file = '%s_%s.%s' % (rec.name, time.strftime('%Y-%m-%d_%H.%M'), rec.backup_type)
                 file_path = os.path.join(rec.folder, bkp_file)
                 uri = 'http://' + rec.host + ':' + rec.port
                 conn = xmlrpclib.ServerProxy(uri + '/xmlrpc/db')
@@ -274,7 +275,7 @@ class db_backup(models.Model):
                 # Loop over all files in the directory.
                 for f in os.listdir(dir):
                     fullpath = os.path.join(dir, f)
-                    # Only delete the ones wich are from the current database 
+                    # Only delete the ones wich are from the current database
                     # (Makes it possible to save different databases in the same folder)
                     if rec.name in fullpath:
                         timestamp = os.stat(fullpath).st_ctime
