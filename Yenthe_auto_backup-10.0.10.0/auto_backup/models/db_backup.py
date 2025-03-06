@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution    
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -44,9 +44,9 @@ _logger = logging.getLogger(__name__)
 
 def execute(connector, method, *args):
     res = False
-    try:        
+    try:
         res = getattr(connector,method)(*args)
-    except socket.error,e:        
+    except socket.error,e:
             raise e
     return res
 
@@ -66,7 +66,7 @@ class db_backup(models.Model):
     def _get_db_name(self):
         dbName = self._cr.dbname
         return dbName
-        
+
     # Columns for local server configuration
     host = fields.Char('Host', size=100, required=True, default='localhost')
     port = fields.Char('Port', size=10, required=True, default=8069)
@@ -75,7 +75,7 @@ class db_backup(models.Model):
     backup_type = fields.Selection([('zip', 'Zip'), ('dump', 'Dump')], 'Backup Type', required=True, default='zip')
     autoremove = fields.Boolean('Auto. Remove Backups', help='If you check this option you can choose to automaticly remove the backup after xx days')
     days_to_keep = fields.Integer('Remove after x days', help="Choose after how many days the backup should be deleted. For example:\nIf you fill in 5 the backups will be removed after 5 days.", required=True)
-                   
+
     # Columns for external server (SFTP)
     sftp_write = fields.Boolean('Write to external server with sftp', help="If you check this option you can specify the details needed to write to a remote server with SFTP.")
     sftp_path = fields.Char('Path external server', help='The location to the folder where the dumps should be written to. For example /odoo/backups/.\nFiles will then be written to /odoo/backups/ on your remote server.')
@@ -95,14 +95,14 @@ class db_backup(models.Model):
         if self.name in db_list:
             return True
         return False
-    
+
     _constraints = [(_check_db_exist, _('Error ! No such database exists!'), [])]
 
     @api.multi
     def test_sftp_connection(self, context=None):
         self.ensure_one()
 
-        #Check if there is a success or fail and write messages 
+        #Check if there is a success or fail and write messages
         messageTitle = ""
         messageContent = ""
 
@@ -144,7 +144,8 @@ class db_backup(models.Model):
                 except:
                     raise
                 #Create name for dumpfile.
-                bkp_file='%s_%s.%s' % (time.strftime('%d_%m_%Y_%H_%M_%S'),rec.name, rec.backup_type)
+               # bkp_file='%s_%s.%s' % (time.strftime('%d_%m_%Y_%H_%M_%S'),rec.name, rec.backup_type)
+                bkp_file = '%s_%s.%s' % (rec.name, time.strftime('%Y-%m-%d_%H.%M.%S'), rec.backup_type)
                 file_path = os.path.join(rec.folder,bkp_file)
                 uri = 'http://' + rec.host + ':' + rec.port
                 conn = xmlrpclib.ServerProxy(uri + '/xmlrpc/db')
